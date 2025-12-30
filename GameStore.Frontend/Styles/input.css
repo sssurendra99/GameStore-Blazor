@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* .link-btn {
+    @apply font-medium hover:font-bold hover:underline hover:underline-offset-4;
+} */
+
+.link-btn {
+    @apply font-medium;
+
+    &:hover {
+        @apply font-bold underline decoration-2 underline-offset-4;
+    }
+}

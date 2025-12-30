@@ -1,0 +1,87 @@
+@page "/editgame"
+@using GameStore.Frontend.Models
+
+<PageTitle>New Game</PageTitle>
+
+<h3 class="text-2xl font-bold text-center mb-6">Edit Game</h3>
+
+<EditForm class="max-w-md mx-auto" Model="@game" FormName="editGame" OnValidSubmit="HandleSubmit">
+    
+    <!-- Name -->
+    <div class="relative z-0 w-full mb-5 group">
+        <InputText @bind-Value="game.Name" id="name" 
+            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+            placeholder=" " />
+        <label for="name" 
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Game Name
+        </label>
+    </div>
+
+    <!-- Genre -->
+    <div class="relative z-0 w-full mb-5 group">
+        <InputSelect @bind-Value="game.GenreId" id="genre"
+            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer">
+            <option value="">Select a genre</option>
+            <option value="1">Fighting</option>
+            <option value="2">RolePlaying</option>
+            <option value="3">Sports</option>
+            <option value="4">Adventure</option>
+            <option value="5">Racing</option>
+            <option value="6">Shooter</option>
+            <option value="7">Action</option>
+            <option value="8">Sandbox</option>
+        </InputSelect>
+        <label for="genre" 
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]">
+            Genre
+        </label>
+    </div>
+
+    <!-- Price and Release Date -->
+    <div class="grid md:grid-cols-2 md:gap-6">
+        <div class="relative z-0 w-full mb-5 group">
+            <InputNumber @bind-Value="game.Price" id="price" 
+                class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+                placeholder=" " />
+            <label for="price" 
+                class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Price ($)
+            </label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <InputDate @bind-Value="game.ReleaseDate" id="releaseDate" 
+                class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" />
+            <label for="releaseDate" 
+                class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0]">
+                Release Date
+            </label>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex gap-3">
+        <button type="submit" 
+            class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+            Save
+        </button>
+        <a href="/" 
+            class="text-gray-700 bg-gray-200 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
+            Cancel
+        </a>
+    </div>
+</EditForm>
+
+@code {
+    private GameDetails game { get; set; } = new()
+    {
+        Name = string.Empty,
+        ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow)
+    };
+
+    private void HandleSubmit()
+    {
+        // Handle form submission
+        Console.WriteLine($"Saving: {game.Name}, {game.GenreId}, {game.Price}, {game.ReleaseDate}");
+    }
+}
